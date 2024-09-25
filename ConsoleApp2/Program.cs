@@ -22,6 +22,7 @@ namespace project
 
         static void Main()
         {
+            int turn = 1;
             Console.WriteLine("GAME RULES");
             Console.WriteLine("There are 2 players in the game. Each player has its map 10x10. Each player has 5 ships: 2 ships cost 1, 2 ships cost 2,and 1 ship cost 3.");
             Console.WriteLine("Each player has right to place their ships on map, using coordinates. For example, if the game says PLACE FIRST 1 COST SHIP, you need to write 5 and 5");
@@ -230,6 +231,33 @@ namespace project
             Skip();
             Console.WriteLine("Maps player 1 and player 2 looks like this");
             PrintTwoMaps(pl1, pl2);
+
+            while (!pl1.CheckIfLost() && !pl2.CheckIfLost())
+            {
+                if (turn == 1)
+                {
+                    Console.WriteLine("PLAYER 1 turn. Please, insert coordinates for damaging/missing enemy's ship: ");
+                    x = Convert.ToInt32(Console.ReadLine());
+                    y = Convert.ToInt32(Console.ReadLine());
+                    pl2.WhatHappens(x, y);
+                } else
+                {
+                    Console.WriteLine("PLAYER 2 turn. Please, insert coordinates for damaging/missing enemy's ship: ");
+                    x = Convert.ToInt32(Console.ReadLine());
+                    y = Convert.ToInt32(Console.ReadLine());
+                    pl1.WhatHappens(x, y);
+                }
+                if (turn == 1) { turn = 2; } else
+                if (turn == 2) {  turn = 1; };
+            }
+
+            if (pl1.CheckIfLost())
+            {
+                Console.WriteLine("PLAYER 2 WINS, ALL SHIPS ARE DESTROYED");
+            } else if (pl2.CheckIfLost())
+            {
+                Console.WriteLine("PLAYER 1 WINS, ALL SHIPS ARE DESTROYED");
+            }
         }
     }
 }

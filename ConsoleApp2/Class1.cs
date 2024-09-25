@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,28 @@ namespace project
             _map = new Map();
         }
 
+        public void WhatHappens (int x, int y)
+        {
+            _map.WhatHappens(x, y);
+            _map.PrintMap(_map);
+        }
+
         public void PrintMap ()
         {
             _map.PrintMap(_map);
+        }
+
+        public bool CheckIfLost()
+        {
+            if (_map.CheckIfLost())
+            {
+                return true;
+            } else { return false; }
+        }
+
+        public void ChangeOnMap (string str, int x, int y)
+        {
+            _map.ChangeOnMap(str, x, y);
         }
 
         public void PlaceOneCostShip (int x, int y)
